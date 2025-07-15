@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Трекер завдань</h1>
+<div class="list-group">
+    {% for task in task_list%}
+    <a href="{% url 'task_detail' task.id %}" class="list-group-item list-group-item-action">{{ task.title }} - {{ tasl.status }}</a>
+    {% endfor %}
+</div>
+{% endblock %}
