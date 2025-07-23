@@ -17,3 +17,7 @@ class TaskCreateView(CreateView):
     template_name = "task_form.html"
     form_class = TaskForm
     success_url = reverse_lazy("tasktrackerapp:task_list")
+
+    def form_valid(self, form):
+        form.instance.created_by = self.request.user
+        return super().form_valid(form)
