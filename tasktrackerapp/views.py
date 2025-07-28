@@ -41,7 +41,7 @@ class TaskCreateView(LoginRequiredMixin, CreateView):
 class TaskCompleteView(LoginRequiredMixin, UserIsOwnerMixin, View):
     def post(self, request, *args, **kwargs):
         task = self.get_object()
-        task.status = "done"
+        task.status = "Готово!"
         task.save()
         return HttpResponseRedirect(reverse_lazy("tasktrackerapp:task_list"))
     
