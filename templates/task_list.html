@@ -4,12 +4,27 @@
 <div class="container mt-3">
     <h1>Трекер завдань</h1>
     <a href="{% url 'tasktrackerapp:task_create'%}" class="btn btn-primary mb-3"><svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-square-plus"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 12h6" /><path d="M12 9v6" /><path d="M3 5a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-14z" /></svg> Додати завдання</a>
+
+    <br>
+
+    <form method="get" class="form-inline mb-3">
+        {{ form.status.label_tag }}
+        {{ form.status }}
+        <button type="submit" class="btn btn-primary ml-2"><svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-filter"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 4h16v2.172a2 2 0 0 1 -.586 1.414l-4.414 4.414v7l-6 2v-8.5l-4.48 -4.928a2 2 0 0 1 -.52 -1.345v-2.227z" /></svg>Фільтрувати</button>
+    </form>
+
     <ul class="list-group">
         {% for task in task_list %}
-        <li class="list-group-item">
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <div>
             <a href="{% url 'tasktrackerapp:task_detail' task.id %}" class="list-group-item list-group-item-action">{{ task.title }} - {{task.get_status_display}}</a>
             <span class="badge text-bg-primary">{{ task.status }}</span>
             <span class="badge text-bg-secondary">{{ task.priority }}</span>
+            </div>
+            <form action="{% url 'tasktrackerapp:task_complete' task.pk %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-warning btn-sm">Помітити як виконано</button>
+            </form>
         </li>
         {% empty %}
         <div class="list-group-item">Завдань не знайдено.</div>
