@@ -18,6 +18,7 @@ class TaskListView(ListView):
         if status:
             queryset = queryset.filter(status=status)
         return queryset
+        
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -41,7 +42,7 @@ class TaskCreateView(LoginRequiredMixin, CreateView):
 class TaskCompleteView(LoginRequiredMixin, UserIsOwnerMixin, View):
     def post(self, request, *args, **kwargs):
         task = self.get_object()
-        task.status = "Готово!"
+        task.status = "Full completed!"
         task.save()
         return HttpResponseRedirect(reverse_lazy("tasktrackerapp:task_list"))
     
