@@ -10,6 +10,7 @@ urlpatterns = [
     path('task/<int:pk>/complete', TaskCompleteView.as_view(), name="task_complete"),
     path('task/<int:pk>/update', TaskUpdateView.as_view(), name="task_update"),
     path('task/<int:pk>/delete', TaskDeleteView.as_view(), name="task_delete"),
+    
 ]
 
 app_name = "tasktrackerapp"
