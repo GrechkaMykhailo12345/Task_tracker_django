@@ -13,7 +13,7 @@ class TaskListView(ListView):
     template_name = "task_list.html"
 
     def get_queryset(self):
-        queryset = super().get_queryset()
+        queryset = Task.objects.filter(created_by=self.request.user)
         status = self.request.GET.get("status", "")
         if status:
             queryset = queryset.filter(status=status)
