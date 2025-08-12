@@ -8,7 +8,7 @@ from tasktrackerapp.forms import TaskForm, TaskFilterForm
 from tasktrackerapp.models import Task
 from django.http import HttpResponseRedirect
 
-class TaskListView(ListView):
+class TaskListView(LoginRequiredMixin, ListView):
     model = Task
     template_name = "task_list.html"
 
@@ -25,7 +25,7 @@ class TaskListView(ListView):
         context["form"] = TaskFilterForm(self.request.GET)
         return context
 
-class TaskDetailView(DetailView):
+class TaskDetailView(LoginRequiredMixin, DetailView):
     model = Task
     template_name = "task_detail.html"
 

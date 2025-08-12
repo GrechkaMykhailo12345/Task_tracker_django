@@ -9,11 +9,19 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        {% if user.is_authenticated %}
+        <form action="{% url 'auth:logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-outline-secondary position-absolute top-0 end-0 m-3">Вийти</button>
+        </form>
+        {% endif %}
         <a class="navbar-brand" href="{% url 'tasktrackerapp:task_list' %}">Головна</a>
     </nav>
+    <div class="container">
     {% block content %}
         
     {% endblock %}
+</div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
 </body>
 </html>
